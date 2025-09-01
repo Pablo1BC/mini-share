@@ -1,0 +1,38 @@
+/* Card elegante */
+.qr-card {
+  max-width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  margin: 40px auto;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover suave */
+.qr-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* Título */
+.qr-card h2 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* QR Code centralizado */
+#qrcodeCanvas {
+  margin: 0 auto 15px auto;
+  width: 180px;
+}
+
+/* Texto abaixo do QR */
+#qrText {
+  font-size: 14px;
+  color: #555;
+  margin-top: 5px;
+}

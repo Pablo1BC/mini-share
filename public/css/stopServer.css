@@ -1,0 +1,41 @@
+/* Container do botão (não afeta posição, apenas centraliza conteúdo interno) */
+.stop-card {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 999;
+  cursor: pointer;
+}
+
+/* Botão circular moderno */
+.stop-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ff4d4f, #ff7875);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: pulse 2s infinite;
+}
+
+/* Hover */
+.stop-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+}
+
+/* Pulsar suave */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,77,79,0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(255,77,79,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,77,79,0); }
+}
