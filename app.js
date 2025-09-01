@@ -19,4 +19,9 @@ require('./services/stopServer')(app);
 // desliga pc
 require('./services/scheduleShutdown')(app);
 
+
+//update
+const checkUpdateRoutes = require("./routes/checkUpdate");
+app.use("/check-update", checkUpdateRoutes);
+
 module.exports = app;
