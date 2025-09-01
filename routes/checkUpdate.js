@@ -5,7 +5,6 @@ const { version: localVersion } = require("../package.json");
 
 const REMOTE_UPDATE_URL = "https://raw.githubusercontent.com/Pablo1BC/mini-share/main/update.json";
 
-// Função simples para comparar versões
 function compareVersions(v1, v2) {
   const a = v1.split(".").map(Number);
   const b = v2.split(".").map(Number);
@@ -22,18 +21,25 @@ router.get("/", async (req, res) => {
     if (!response.ok) throw new Error("Falha ao buscar update.json");
     const remoteData = await response.json();
     const remoteVersion = remoteData.version;
+    const zipUrl = remoteData.url;
 
     const cmp = compareVersions(localVersion, remoteVersion);
 
     if (cmp < 0) {
-      console.log("Atualização disponível! Executando update.bat...");
-      exec("update.bat"); // chama o bat para atualizar
+      console.log("Atualização disponível! Chamando update.bat...");
+      // chama o bat passando a URL do ZIP
+      exec(`update.bat "${zipUrl}"`, (err, stdout, stderr) => {
+        if (err) console.error(err);
+        console.log(stdout);
+        console.error(stderr);
+      });
     }
 
     res.json({
       localVersion,
       remoteVersion,
-      updateAvailable: cmp < 0
+      updateAvailable: cmp < 0,
+      zipUrl
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
