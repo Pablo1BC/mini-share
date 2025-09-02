@@ -3,31 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Mini Share</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; background: #f0f2f5; }
-    h1 { text-align: center; }
-    #dropzone {
-      border: 3px dashed #007bff;
-      border-radius: 10px;
-      padding: 40px;
-      text-align: center;
-      color: #007bff;
-      font-size: 18px;
-      margin-bottom: 20px;
-      transition: background 0.3s;
-      cursor: pointer;
-    }
-    #dropzone.hover { background: #e0f0ff; }
-    ul { list-style: none; padding: 0; }
-    li { background: #fff; margin: 5px 0; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    li i { margin-right: 10px; }
-    button { background: #dc3545; color: #fff; border: none; border-radius: 3px; padding: 5px 10px; cursor: pointer; }
-    button:hover { background: #c82333; }
-    a { text-decoration: none; color: #007bff; }
-    a:hover { text-decoration: underline; }
-  </style>
+<link rel="icon" type="image/png" href="/favicon.png">
+
 </head>
 <body>
+
+
+
+
+<!-- Files //////////////////////////////////////////////-->
+  <link rel="stylesheet" href="./css/files.css">
   <h1>Mini Share</h1>
 
   <div id="dropzone">Arraste arquivos aqui ou clique para selecionar</div>
@@ -36,143 +21,28 @@
   <h2>Arquivos:</h2>
   <ul id="fileList"></ul>
 
-  <script>
-    const dropzone = document.getElementById("dropzone");
-    const fileInput = document.getElementById("fileInput");
-    const fileListEl = document.getElementById("fileList");
-
-    // Upload de arquivo
-    async function uploadFile(file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      await fetch("/upload", { method: "POST", body: formData });
-      loadFiles();
-    }
-
-    // Drag & drop
-    dropzone.addEventListener("dragover", e => { e.preventDefault(); dropzone.classList.add("hover"); });
-    dropzone.addEventListener("dragleave", () => dropzone.classList.remove("hover"));
-    dropzone.addEventListener("drop", e => {
-      e.preventDefault();
-      dropzone.classList.remove("hover");
-      const files = Array.from(e.dataTransfer.files);
-      files.forEach(uploadFile);
-    });
-
-    // Clique abre seletor de arquivo
-    dropzone.addEventListener("click", () => fileInput.click());
-    fileInput.addEventListener("change", () => {
-      const files = Array.from(fileInput.files);
-      files.forEach(uploadFile);
-    });
-
-    // Função para carregar a lista de arquivos
-   async function loadFiles() {
-  const res = await fetch("/files"); // pega a listagem da pasta
-  const html = await res.text();
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
-
-  // pega apenas arquivos (ignora diretórios, ".." e "files")
-  const links = Array.from(doc.querySelectorAll("a")).filter(a => {
-    const filename = decodeURIComponent(a.getAttribute("href").split("/").pop());
-    return filename && filename !== ".." && filename !== "files" && !filename.endsWith("/");
-  });
-
-  fileListEl.innerHTML = "";
-  links.forEach(link => {
-    const li = document.createElement("li");
-
-    const icon = document.createElement("i");
-    icon.textContent = "📄";
-    li.appendChild(icon);
-
-    const filename = decodeURIComponent(link.getAttribute("href").split("/").pop());
-
-    const a = document.createElement("a");
-    a.href = link.href;
-    a.textContent = filename;
-    a.target = "_blank";
-
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "Deletar";
-    delBtn.onclick = async () => {
-      if (confirm(`Deletar ${filename}?`)) {
-        await fetch(`/delete?file=${encodeURIComponent(filename)}`, { method: "DELETE" });
-        loadFiles();
-      }
-    };
-
-    li.appendChild(a);
-    li.appendChild(delBtn);
-    fileListEl.appendChild(li);
-  });
-}
+<script src="./js/files.js"></script>
 
 
-    // Carrega a lista ao abrir a página
-    loadFiles();
-  </script>
 </body>
 </html>
+<!--//////////////////////////////////////////////-->
 
 
 
 
-
-
+<!-- Qr Code //////////////////////////////////////////////-->
 <div id="qrcode" class="qr-card">
   <h2>Acesse pelo QR Code</h2>
   <div id="qrcodeCanvas"></div>
   <p id="qrText">Abra no seu celular para acessar</p>
 </div>
 
-<style>
-/* Card elegante */
-.qr-card {
-  max-width: 300px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-  margin: 40px auto;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+<link rel="stylesheet" href="./css/QrCode.css">
 
-/* Hover suave */
-.qr-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-}
-
-/* Título */
-.qr-card h2 {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-/* QR Code centralizado */
-#qrcodeCanvas {
-  margin: 0 auto 15px auto;
-  width: 180px;
-}
-
-/* Texto abaixo do QR */
-#qrText {
-  font-size: 14px;
-  color: #555;
-  margin-top: 5px;
-}
-</style>
-
-
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
- <script src="js/qrcode.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/qrcode.js"></script>
+<!--//////////////////////////////////////////////-->
 
 
 
@@ -186,80 +56,44 @@
 
 
 
-
-
+<!--//////////////////////////////////////////////-->
 <div onclick="stopServer()" class="stop-card">
   <button class="stop-btn">Parar Servidor</button>
 </div>
+<link rel="stylesheet" href="./css/stopServer.css">
 
-<style>
-/* Container do botão (não afeta posição, apenas centraliza conteúdo interno) */
-.stop-card {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  z-index: 999;
-  cursor: pointer;
+<script src="./js/stopServer.js"></script>
+<!--//////////////////////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+  <!--//////////////////////////////////////////////-->
+  <style>
+.shutdown {
+    background-color: rgba(135, 185, 194, 0.534);
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 3px dotted #687375; /* borda pontilhada */
+    border-radius: 5px; /* opcional, para arredondar cantos */
 }
+    input, button { padding: 10px; margin: 5px; font-size: 16px; }
+  </style>
 
-/* Botão circular moderno */
-.stop-btn {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, #ff4d4f, #ff7875);
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
-  animation: pulse 2s infinite;
-}
+<div class="shutdown">
+  <h1>Agendar Desligamento do PC</h1>
+  <input type="number" id="minutes" placeholder="Minutos" min="1">
+  <button onclick="schedule()">Agendar</button>
+  <button onclick="cancel()">Cancelar</button>
+  <p id="msg"></p>
+  <script src="./js/Shutdown.js"></script>
 
-/* Hover */
-.stop-btn:hover {
-  transform: scale(1.15);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-}
-
-/* Pulsar suave */
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,77,79,0.4); }
-  70% { box-shadow: 0 0 0 15px rgba(255,77,79,0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,77,79,0); }
-}
-</style>
-
-<script>
-async function stopServer() {
-  try {
-    const res = await fetch('/stop-server', { method: 'POST' });
-    const data = await res.json();
-    if (data.success) {
-      alert('Servidor será parado.');
-    } else {
-      alert('Falha ao parar o servidor.');
-    }
-  } catch (err) {
-    console.error(err);
-    alert('Erro na requisição.');
-  }
-}
-</script>
-
-
-
-
-
-
-
-
-
-
-
+</div>
+<!--//////////////////////////////////////////////-->
