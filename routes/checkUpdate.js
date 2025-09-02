@@ -3,7 +3,7 @@ const router = express.Router();
 const { exec } = require("child_process");
 const { version: localVersion } = require("../package.json");
 
-const REMOTE_UPDATE_URL = "https://raw.githubusercontent.com/Pablo1BC/mini-share/main/update.json";
+const REMOTE_UPDATE_URL = "https://devzone-pbc.netlify.app/update/mini-share/update.json";
 
 function compareVersions(v1, v2) {
   const a = v1.split(".").map(Number);
