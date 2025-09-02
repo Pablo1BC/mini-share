@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Mini Share</title>
-<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" href="/miniShare.png">
 
 </head>
 <body>
@@ -108,7 +108,15 @@
 
 
 
+<div id="menu"></div>
+
+<script>
+  fetch("./menu/menu.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("menu").innerHTML = html;
+    })
+    .catch(err => console.error("Erro ao carregar menu:", err));
+</script>
 
 
-
-<a href="http://localhost:3000/check-update">update</a>
