@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
     if (cmp < 0) {
       console.log("Atualização disponível! Chamando update.bat...");
       // chama o bat passando a URL do ZIP
-      exec(`update.bat "${zipUrl}"`, (err, stdout, stderr) => {
+      exec(`start "" update.bat "${zipUrl}"`, (err, stdout, stderr) => {
         if (err) console.error(err);
         console.log(stdout);
         console.error(stderr);
