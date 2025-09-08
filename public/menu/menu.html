@@ -6,6 +6,9 @@
 <title>Menu JS Multi-Nível</title>
 <style>
   body { font-family: Arial, sans-serif; }
+  .menu{
+    width: 300px;
+  }
   ul { list-style: none; padding-left: 0; }
   li { border-bottom: 1px solid #eee; }
   a, .menu-label {
@@ -62,26 +65,7 @@
   </ul>
 </div>
 
-<script>
-  // Seleciona todas as labels que controlam submenus
-  const labels = document.querySelectorAll('.menu-label');
 
-  labels.forEach(label => {
-    label.addEventListener('click', () => {
-      const submenu = label.nextElementSibling;
-      const isOpen = submenu.style.display === 'block';
-
-      // Fecha todos submenus irmãos se quiser comportamento accordion
-      // const siblings = Array.from(label.parentElement.parentElement.children);
-      // siblings.forEach(sib => {
-      //   if (sib !== label.parentElement) sib.querySelector('.submenu')?.style.display = 'none';
-      // });
-
-      submenu.style.display = isOpen ? 'none' : 'block';
-      label.classList.toggle('open', !isOpen);
-    });
-  });
-</script>
 
 </body>
 </html>

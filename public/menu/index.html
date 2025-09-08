@@ -1,0 +1,75 @@
+<nav>
+  <ul>
+    <li><a href="#">Menu 1</a></li>
+    <li><a href="#">Menu 2</a></li>
+    <li>
+      <div class="menu-label">Menu 3 ▼</div>
+      <ul class="submenu">
+        <li><a href="#">Sub 3-1</a></li>
+        <li>
+          <div class="menu-label">Sub 3-2 ▼</div>
+          <ul class="submenu">
+            <li><a href="#">Sub 3-2-1</a></li>
+            <li><a href="#">Sub 3-2-2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#">Menu 4</a></li>
+  </ul>
+</nav>
+<style>
+  .menu nav {
+  font-family: Arial, sans-serif;
+  max-width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  margin: 5px 0;
+}
+
+.menu a, .menu .menu-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.menu a:hover,
+.menu .menu-label:hover {
+  background: #f0f2f5;
+}
+
+.menu .submenu {
+  display: none;
+  margin-left: 15px;
+  border-left: 2px solid #e0e0e0;
+  padding-left: 10px;
+  transition: max-height 0.3s ease;
+}
+
+.menu .submenu.open {
+  display: block;
+}
+
+.menu-label.open {
+  font-weight: bold;
+  color: #007bff;
+}
+
+</style>

@@ -1,21 +1,115 @@
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; background: #f0f2f5; }
-    h1 { text-align: center; }
-    #dropzone {
-      border: 3px dashed #007bff;
-      border-radius: 10px;
-      padding: 40px;
-      text-align: center;
-      color: #007bff;
-      font-size: 18px;
-      margin-bottom: 20px;
-      transition: background 0.3s;
-      cursor: pointer;
-    }
-    #dropzone.hover { background: #e0f0ff; }
-    ul { list-style: none; padding: 0; }
-    li { background: #fff; margin: 5px 0; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    li i { margin-right: 10px; }
-    button { background: #dc3545; color: #fff; border: none; border-radius: 3px; padding: 5px 10px; cursor: pointer; }
-    button:hover { background: #c82333; }
-    a { text-decoration: none; color: #007bff; }
-    a:hover { text-decoration: underline; }
+.files {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.files h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #333;
+}
+
+.files h2 {
+  margin: 20px 0 10px;
+  font-size: 20px;
+  color: #444;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 5px;
+}
+
+.files #dropzone {
+  border: 2px dashed #007bff;
+  border-radius: 12px;
+  padding: 50px 20px;
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
+  background: #f9fbff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.files #dropzone:hover,
+.files #dropzone.hover {
+  background: #eaf4ff;
+  transform: scale(1.02);
+}
+
+.files #dropzone p {
+  margin: 0;
+}
+
+.files #dropzone span {
+  font-weight: bold;
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.files ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.files li {
+  background: #fdfdfd;
+  margin: 8px 0;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+}
+
+.files li:hover {
+  background: #f7faff;
+}
+
+.files .file-info {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.files .file-info i {
+  margin-right: 8px;
+}
+
+.files .file-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.files a {
+  color: #007bff;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.files a:hover {
+  text-decoration: underline;
+}
+
+.files button {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.files button:hover {
+  background: #e63e40;
+}
