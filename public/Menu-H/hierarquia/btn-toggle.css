@@ -1,4 +1,4 @@
-.wrapper-background{
+.wrapper-backgrounda{
   position: absolute;
   top: 0;
   left: 0;
@@ -14,8 +14,9 @@ overflow: hidden;
   left: 0;
   width: var(--menu-width);
   height: 100vh;
-  background-color: #222;
-  border-radius: var(--radius) 0 0 var(--radius);
+    background: linear-gradient(120deg, #65a4f6 0%, #fda085 100%);
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
   box-shadow: 0 6px 18px rgba(10,20,30,0.08);
 
   border-right: 1px solid rgba(0,0,0,0.06);
@@ -24,12 +25,24 @@ overflow: hidden;
   transform: translateX(-100%);
   transition: transform var(--transition) ease;
 
+  
   z-index: 20;
 }
 
 .menu-wrap.open {
   transform: translateX(0); /* quando abre */
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* botão toggle colado na lateral */

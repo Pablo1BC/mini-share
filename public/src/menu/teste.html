@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Dinâmico</title>
+  <style>
+    .submenu {
+      display: none;
+      margin-left: 20px;
+    }
+    .submenu.open {
+      display: block;
+    }
+    .arrow {
+      width: 16px;
+      height: 16px;
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+    .arrow.rotate {
+      transform: rotate(180deg);
+    }
+    .menu-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu"></div>
+
+  <script>
+    // carrega menu.html
+    fetch('./menu.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('menu').innerHTML = data;
+
+        // só roda a lógica depois que o menu foi inserido
+        inicializarMenu();
+      })
+      .catch(err => console.error('Erro ao carregar menu:', err));
+
+    function inicializarMenu() {
+      const labels = document.querySelectorAll(".menu-label");
+
+      labels.forEach(label => {
+        label.addEventListener("click", () => {
+          const submenu = label.nextElementSibling;
+          const arrow = label.querySelector(".arrow");
+
+          if (submenu) submenu.classList.toggle("open");
+          if (arrow) arrow.classList.toggle("rotate");
+        });
+      });
+    }
+  </script>
+</body>
+</html>

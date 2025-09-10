@@ -23,35 +23,47 @@ function menu(){
 
 
 
+const htmlContent2 = `
+<div class="shutdown">
+  <h1>Agendar Shutdown</h1>
+  <input type="number" id="minutes" placeholder="Minutos" min="1">
+  <button onclick="schedule()">Agendar</button>
+  <button onclick="cancel()">Cancelar</button>
+  <p id="msg"></p>
+  <script src="./js/Shutdown.js"></script>
+</div>
+`;
+
 
   
     // === Estrutura do menu (modifique aqui) ===
-    const menuData = [
-  
-     
+const menuData = [
+  {
+    title: "Configurações",
+    children: [
+      { 
+        html:htmlContent2
+      },
       {
-        title: "Configurações",
+        title: "Testes",
         children: [
-          { title: "Desligar PC", href: "desligarPC()" },
+          { title: "Menu-3-2-2", href: "#m3-2-2" },
+         
           {
-            title: "Menu-3-2",
+            title: "Menu-3-2-3",
             children: [
-               { title: "Menu-3-2-2", href: "#m3-2-2" },
-              { title: "Menu-3-2-2", href: "#m3-2-2" },
-              {
-                title: "Menu-3-2-3",
-                children: [
-                  { title: "Menu-3-2-3-1", href: "#m3-2-3-1" },
-                  { title: "Menu-3-2-3-2", href: "#m3-2-3-2" }
-                ]
-              }
+              { title: "Menu-3-2-3-1", href: "#m3-2-3-1" },
+              { title: "Menu-3-2-3-2", href: "#m3-2-3-2" }
             ]
           }
         ]
-      },
-      { title: "Parar Servidor", href: "stopServer()" },
-      { title: "Update", href: "http://localhost:3000/check-update" }
-    ];
+      }
+    ]
+  },
+  { title: "Parar Servidor", href: "stopServer()" },
+  { title: "Update", href: "http://localhost:3000/check-update" }
+];
+
 
     // === Estado e helpers ===
     const viewport = document.getElementById('viewport');
@@ -66,6 +78,9 @@ function menu(){
       const header = document.createElement('div');
       header.className = 'menu-header';
 
+
+
+      
       if (!isRoot) {
         const back = document.createElement('button');
         back.className = 'back';
@@ -91,41 +106,56 @@ function menu(){
       const ul = document.createElement('ul');
       ul.className = 'menu-list';
 
-      items.forEach(item => {
-        const li = document.createElement('li');
-        li.className = 'menu-item';
+  items.forEach(item => {
+  const li = document.createElement('li');
+  li.className = 'menu-item';
 
-        if (item.children && item.children.length) {
-          // botão que abre submenu
-          const btn = document.createElement('div');
-          btn.className = 'item-btn';
-          btn.tabIndex = 0;
-          btn.setAttribute('role','button');
-          btn.setAttribute('aria-haspopup','true');
-          btn.innerHTML = `<span>${item.title}</span><svg class="item-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>`;
-          btn.addEventListener('click', () => openSubmenu(item));
-          btn.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSubmenu(item); } });
-          li.appendChild(btn);
-        } else {
-          // link ou function()
-     const a = document.createElement('a');
-        a.className = 'item-link';
-        a.href = '#'; // impede navegação
-        a.textContent = item.title;
-        a.addEventListener('click', (e) => {
-          e.preventDefault(); // não navega
-          if (item.href === "stopServer()") {
-            stopServer(); // chama a função
-          } else {
-            console.log('clicou em link:', item.title, 'href:', item.href);
-          }
-        });
+  if (item.html) {
+    // caso especial: renderizar HTML direto
+    li.innerHTML = item.html;
+  } else if (item.children && item.children.length) {
+    // botão que abre submenu
+    const btn = document.createElement('div');
+    btn.className = 'item-btn';
+    btn.tabIndex = 0;
+    btn.setAttribute('role','button');
+    btn.setAttribute('aria-haspopup','true');
+    btn.innerHTML = `<span>${item.title}</span>
+      <svg class="item-arrow" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 6l6 6-6 6"/>
+      </svg>`;
+    btn.addEventListener('click', () => openSubmenu(item));
+    btn.addEventListener('keydown', (e)=> {
+      if(e.key === 'Enter' || e.key === ' ') { 
+        e.preventDefault(); 
+        openSubmenu(item); 
+      }
+    });
+    li.appendChild(btn);
+  } else {
+    // link normal ou função
+    const a = document.createElement('a');
+    a.className = 'item-link';
+    a.href = '#'; // evita navegação real
+    a.textContent = item.title;
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (item.href === "stopServer()") {
+        stopServer();
+      } else if (item.href === "desligarPC()") {
+        desligarPC();
+      } else if (item.href) {
+        window.location.href = item.href; // ou faça outra lógica
+      } else {
+        console.log('clicou em link:', item.title);
+      }
+    });
+    li.appendChild(a);
+  }
 
-          li.appendChild(a);
-        }
+  ul.appendChild(li);
+});
 
-        ul.appendChild(li);
-      });
 
       view.appendChild(ul);
       return view;

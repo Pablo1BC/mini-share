@@ -9,7 +9,7 @@
       --surface: #fff;
       --radius: 10px;
       --transition: 280ms;
-      --menu-width: 360px;
+      --menu-width: 54vw;
       
     }
 
@@ -122,5 +122,5 @@
     /* pequenos estilos responsivos */
     @media (max-width:420px){
       body{ padding:12px; }
-      .menu-wrap{ width:100%; border-radius:8px; }
+      
     }

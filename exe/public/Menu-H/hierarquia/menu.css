@@ -1,0 +1,126 @@
+  *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root{
+      --accent: #2d2e30;
+      --bg: #f4f4f4;
+      --surface: #fff;
+      --radius: 10px;
+      --transition: 280ms;
+      --menu-width: 54vw;
+      
+    }
+
+    body{
+      font-family: Inter, system-ui, Arial, sans-serif;
+  
+      align-items:flex-start;
+    
+
+      background: #f0f2f5;
+    }
+
+
+    /* viewport que contém views empilhadas */
+    .menu-viewport{
+      position: relative;
+      width: 100%;
+      /* height é ajustado dinamicamente via JS com transição */
+      transition: height var(--transition) ease;
+      overflow: hidden;
+
+    }
+
+    /* cada "view" ocupa todo o espaço da viewport e é animada */
+    .view{
+      position: absolute;
+      inset: 0;
+      padding: 12px;
+      box-sizing: border-box;
+      transform: translateX(100%);
+      transition: transform var(--transition) ease;
+      will-change: transform;
+      
+    }
+    .view.active { transform: translateX(0); }
+    .view.left   { transform: translateX(-100%); } /* quando fica para trás */
+    .view.right  { transform: translateX(100%); }  /* quando sai para a direita (back) */
+
+    /* header (titulo + botão voltar) */
+    .menu-header{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px;
+      background: var(--accent);
+      color:white;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .menu-header .back{
+      background: white;
+      color: var(--accent);
+      border: 0;
+      padding:6px 10px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .menu-header .title{
+      font-weight:700;
+      font-size:15px;
+      flex:1;
+    }
+
+    /* lista */
+    .menu-list{
+      list-style:none;
+      padding: 0;
+      margin: 0;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .menu-item{
+      display:flex;
+    }
+
+    .item-btn, .item-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex:1;
+      padding:10px 12px;
+      background: var(--bg);
+      border-radius:8px;
+      text-decoration:none;
+      color: #222;
+      cursor:pointer;
+      border: 1px solid rgba(0,0,0,0.03);
+      transition: background 160ms, transform 160ms;
+      user-select:none;
+    }
+    .item-btn:hover, .item-link:hover{
+      background: rgba(0,123,255,0.12);
+      transform: translateY(-1px);
+      color: var(--accent);
+    }
+
+    .item-arrow{
+      width:18px;
+      height:18px;
+      display:inline-block;
+      transform: rotate(0deg);
+      transition: transform 200ms;
+      opacity:0.9;
+    }
+
+    /* pequenos estilos responsivos */
+    @media (max-width:420px){
+      body{ padding:12px; }
+      
+    }

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Share</title>
+<link rel="icon" type="image/png" href="/miniShare.png">
+<link rel="stylesheet" href="./src/shutdown/shutdown.css">
+</head>
+<body>
+
+
+
+<!-- Files //////////////////////////////////////////////-->
+
+<section class="files">
+  <link rel="stylesheet" href="./css/files.css">
+
+  <h1>📂 Mini Share</h1>
+
+  <div id="dropzone">
+    <p>Arraste arquivos aqui ou <span>clique para selecionar</span></p>
+  </div>
+  <input type="file" id="fileInput" style="display:none">
+
+  <h2>📋 Arquivos</h2>
+  <ul id="fileList">
+    <!-- exemplo de item -->
+    <li>
+      <div class="file-info">
+        <i>📄</i> <span>arquivo-exemplo.txt</span>
+      </div>
+      <div class="file-actions">
+        <a href="#">⬇️ Baixar</a>
+        <button>🗑️ Excluir</button>
+      </div>
+    </li>
+  </ul>
+
+  <script src="./js/files.js"></script>
+</section>
+
+<!-- Files //////////////////////////////////////////////-->
+
+</body>
+</html>
+<!--//////////////////////////////////////////////-->
+
+
+
+
+<!-- Qr Code //////////////////////////////////////////////-->
+<div id="qrcode" class="qr-card">
+  <h2>Acesse pelo QR Code</h2>
+  <div id="qrcodeCanvas"></div>
+  <p id="qrText">Abra no seu celular para acessar</p>
+</div>
+
+<link rel="stylesheet" href="./css/QrCode.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/qrcode.js"></script>
+<!--//////////////////////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--//////////////////////////////////////////////-->
+<div onclick="stopServer()" class="stop-card">
+  <button class="stop-btn">Parar Servidor</button>
+</div>
+<link rel="stylesheet" href="./css/stopServer.css">
+
+<script src="./js/stopServer.js"></script>
+<!--//////////////////////////////////////////////-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <div id="menu"></div>
+
+  <script>
+    // carrega menu.html dentro de #menu
+    fetch('./Menu-H/hierarquia/menu.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('menu').innerHTML = data;
+        inicializarMenu();
+      })
+      .catch(err => console.error('Erro ao carregar menu:', err));
+
+    function inicializarMenu() {
+      menu()
+    }
+  </script>
+</body>
+</html>
+<script src="./Menu-H/hierarquia/script.js"></script>
+<link rel="stylesheet" href="./Menu-H/hierarquia/btn-toggle.css">
+<link rel="stylesheet" href="./Menu-H/hierarquia/menu.css">
+<link rel="stylesheet" href="./Menu-H/hierarquia/hamburger.css">
