@@ -1,0 +1,12 @@
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* cor escura com transparência */
+  backdrop-filter: blur(5px);          /* blur no fundo */
+           
+  transition: opacity 0.3s ease;        /* fade suave */
+}
