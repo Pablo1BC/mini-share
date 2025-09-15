@@ -1,24 +1,6 @@
-function menu(){  
+function menuLateral(){  
   
 
-
-  const overlay = document.querySelector('.overlay');
-  const menu = document.querySelector('.menu-wrap');
-  const btn = document.querySelector('.menu-toggle');
-
-  btn.addEventListener('click', () => {
-    menu.classList.toggle('open');
-    overlay.classList.toggle('show');
-   
-  });
-
-  overlay.addEventListener('click', () => {
-    menu.classList.remove('open');
-    overlay.classList.remove('show');
-
-    btn.classList.toggle('opened');
-    btn.setAttribute('aria-expanded', btn.classList.contains('opened'));
-  });
 
 
 
@@ -237,3 +219,6 @@ const menuData = [
       const active = stack[stack.length - 1];
       if (active) adjustHeightTo(active);
     });}
+
+
+      menuLateral()
