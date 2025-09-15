@@ -1,3 +1,5 @@
+function btnInity(){
+  
 const menu = document.querySelector('.menu-wrap');
 
 
@@ -51,3 +53,5 @@ const btn = document.querySelector('.menu-toggle');
 }
 
 
+
+}

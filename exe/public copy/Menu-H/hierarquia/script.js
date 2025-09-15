@@ -221,4 +221,3 @@ const menuData = [
     });}
 
 
-      menuLateral()

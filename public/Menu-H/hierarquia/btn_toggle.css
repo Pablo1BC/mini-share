@@ -1,5 +1,5 @@
 
-   .menu-wrap {
+.menu-wrap {
   position:  absolute;
   top: 0;
   left: 0;
@@ -40,11 +40,11 @@
 .menu-toggle {
   position: fixed;
   top: 10px;
-  left: 0;
-  transform: translateX(calc(var(--menu-width) + 10px));
+  left: calc(var(--menu-width) + 10px);
+
   z-index: 100;
   
-  background: var(--accent);
+
   color: white;
   border: 0;
   width: 40px;
